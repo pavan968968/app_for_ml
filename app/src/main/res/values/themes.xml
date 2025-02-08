@@ -1,0 +1,54 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MainActivity" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/lavender</item>
+        <item name="colorPrimaryContainer">@color/primary_dark</item>
+        <item name="colorPrimaryVariant">@color/lavender</item>
+
+
+
+        <!-- Secondary/Accent Colors -->
+        <item name="colorSecondary">@color/accent</item>
+        <item name="colorSecondaryContainer">#0D8C6A</item> <!-- Darker teal for variants -->
+
+        <!-- Background & Surface Colors -->
+        <item name="android:windowBackground">@color/surface</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/background</item>
+
+        <!-- Text & Icon Colors -->
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorOnSecondary">@color/on_primary</item>
+        <item name="colorOnSurface">@color/on_primary</item>
+        <item name="colorOnBackground">@color/on_primary</item>
+
+        <!-- Typography -->
+        <item name="textAppearanceHeadlineSmall">@style/TextAppearance.MyApp.HeadlineSmall</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.MyApp.BodyLarge</item>
+
+        <!-- Buttons -->
+        <item name="materialButtonStyle">@style/Widget.MyApp.Button</item>
+    </style>
+
+    <!-- Main application theme -->
+    <style name="Theme.MainActivity" parent="Base.Theme.MainActivity" />
+
+    <!-- Custom Text Appearances -->
+    <style name="TextAppearance.MyApp.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.MyApp.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <!-- Custom Button Style -->
+    <style name="Widget.MyApp.Button" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/primary</item>
+        <item name="android:textColor">@color/on_primary</item>
+        <item name="cornerRadius">16dp</item> <!-- Rounded corners -->
+    </style>
+</resources>

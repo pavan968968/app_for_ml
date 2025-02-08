@@ -1,0 +1,19 @@
+<!-- res/values/colors.xml -->
+<resources>
+    <!-- Primary Colors -->
+    <color name="primary">#2979FF</color>
+    <color name="black">#000000</color><!-- A bright, energetic blue -->
+    <color name="primary_dark">#0039CB</color>    <!-- A deep, rich blue for contrast -->
+    <color name="white">#FFFFFF</color>
+    <!-- Accent Colors -->
+    <color name="accent">#FF4081</color>          <!-- A vivid, eye-catching pink -->
+
+    <!-- Background & Surface Colors -->
+    <color name="background">#FAFAFA</color>      <!-- A light, clean grey for a modern feel -->
+    <color name="surface">#FFFFFF</color>         <!-- A crisp white for surfaces -->
+
+    <!-- Text & Icon Colors -->
+    <color name="on_primary">#FFFFFF</color>      <!-- White for text/icons on primary-colored backgrounds -->
+    <color name="text_primary">#212121</color>
+    <color name="lavender">#8692f7</color>
+</resources>

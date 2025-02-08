@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MainActivity</string>
+    <string name="start_button">Get Started</string>
+    <string name="real_time_detection">Real-time Detection</string>
+</resources>
