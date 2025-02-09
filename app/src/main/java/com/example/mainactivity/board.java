@@ -1,51 +1,96 @@
-package com.example.mainactivity;  // Replace with your actual package name
+package com.example.mainactivity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class board extends AppCompatActivity {
+    private ViewPager2 viewPager;
+    private Handler sliderHandler = new Handler();
+    private List<Object> imageList; // Supports both URLs and Drawables
+    private int currentPage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_board);  // Ensure this is the correct XML file
+        setContentView(R.layout.activity_board);
 
-        // Initializing buttons from activity_board.xml
-        Button bt1 = findViewById(R.id.bt1);
-        Button bt2 = findViewById(R.id.bt2);
-        Button bt3 = findViewById(R.id.bt3);
-        Button bt4 = findViewById(R.id.bt4);
+        // Initialize buttons
+        setupButtonClickListeners();
 
-        // Setting click listeners for buttons
-        bt1.setOnClickListener(new View.OnClickListener() {
+        // Initialize ViewPager2 for auto image slider
+        setupImageSlider();
+    }
+
+    private void setupButtonClickListeners() {
+        int[] buttonIds = {R.id.bt1, R.id.bt2, R.id.bt3, R.id.bt4, R.id.bt5};
+        for (int id : buttonIds) {
+            Button button = findViewById(id);
+            if (button != null) {
+                button.setOnClickListener(view ->
+                        Toast.makeText(board.this, button.getText() + " Clicked", Toast.LENGTH_SHORT).show());
+            }
+        }
+    }
+
+    private void setupImageSlider() {
+        viewPager = findViewById(R.id.viewPager);
+
+        // Initialize image list (Drawable resources & URLs)
+        imageList = new ArrayList<>();
+        imageList.add(R.drawable.image1); // Local drawable image
+        imageList.add(R.drawable.image2);
+        imageList.add("https://example.com/image1.jpg"); // Online image URL
+        imageList.add("https://example.com/image2.jpg");
+
+        // Set up adapter
+        ImageSliderAdapter adapter = new ImageSliderAdapter(imageList);
+        viewPager.setAdapter(adapter);
+
+        // Auto slide functionality
+        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(board.this, "Button 1 Clicked", Toast.LENGTH_SHORT).show();
+            public void onPageSelected(int position) {
+                currentPage = position;
+                super.onPageSelected(position);
             }
         });
 
-        bt2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(board.this, "Button 2 Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+        startAutoSlider();
+    }
 
-        bt3.setOnClickListener(new View.OnClickListener() {
+    private void startAutoSlider() {
+        Runnable sliderRunnable = new Runnable() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(board.this, "Button 3 Clicked", Toast.LENGTH_SHORT).show();
+            public void run() {
+                if (imageList != null && !imageList.isEmpty()) {
+                    currentPage = (currentPage + 1) % imageList.size();
+                    viewPager.setCurrentItem(currentPage, true);
+                    sliderHandler.postDelayed(this, 3000); // Change image every 3 seconds
+                }
             }
-        });
+        };
 
-        bt4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(board.this, "Button 4 Clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
+        sliderHandler.postDelayed(sliderRunnable, 3000);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sliderHandler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        startAutoSlider();
     }
 }
