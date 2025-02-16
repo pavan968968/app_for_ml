@@ -1,5 +1,6 @@
 package com.example.mainactivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -35,8 +36,18 @@ public class board extends AppCompatActivity {
         for (int id : buttonIds) {
             Button button = findViewById(id);
             if (button != null) {
-                button.setOnClickListener(view ->
-                        Toast.makeText(board.this, button.getText() + " Clicked", Toast.LENGTH_SHORT).show());
+                if (id == R.id.bt1) {
+                    // Handle Open Camera button
+                    button.setOnClickListener(v -> {
+                        Intent intent = new Intent(board.this, CameraActivity.class);
+                        startActivity(intent);
+                    });
+                } else {
+                    // Other buttons show toast
+                    button.setOnClickListener(v ->
+                            Toast.makeText(board.this, button.getText() + " Clicked", Toast.LENGTH_SHORT).show()
+                    );
+                }
             }
         }
     }
